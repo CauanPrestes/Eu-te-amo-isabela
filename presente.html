@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Te amo</title>
+  <link rel="icon" href="imagens/icone.png">
+  <style>
+    body {
+      background-image: url("imagens/");
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      overflow-x: hidden;
+      font-family: sans-serif;
+      background-color: #000000;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .estrutura {
+      position: relative;
+      width: 360px;
+      height: 600px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .estrutura video {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      
+    }
+
+    .voltar-seta {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 28px;
+      z-index: 10;
+    }
+
+    .seguir-seta {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 28px;
+      z-index: 10;
+    }
+
+    .estrutura-content {
+      position: relative;
+      z-index: 1;
+      backdrop-filter: brightness(0.8);
+      padding: 16px;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-info {
+      text-align: center;
+      font-size: 12px;
+      color: #ffffffdc;
+      margin-bottom: 365px;
+    }
+
+    .top-info h2 {
+      margin: 4px 0 16px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .music-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cover {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+    }
+
+    .details h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .details p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    .progress-container {
+      height: 5px;
+      background: #ffffff6e;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #ffffff;
+      transition: width 0.1s;
+    }
+
+    .controls {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      opacity: 0.7;
+    }
+
+    .contador-card {
+      background-color: #1a1a1a;
+      color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 360px;
+      margin: 20px auto;
+      font-family: sans-serif;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .imagem-casal {
+      position: relative;
+    }
+
+    .imagem-casal img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .texto-sobreposto {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    .texto-sobreposto h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .texto-sobreposto p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .tempo-contador {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(145deg, #1e1e1e, #2b2b2b);
+      border-top: 1px solid #333;
+      border-radius: 0 0 16px 16px;
+    }
+
+    .tempo-contador div {
+      background-color: #1111115d;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px 12px;
+      min-width: 70px;
+      box-shadow: inset 0 0 5px #00000080;
+      transition: background 0.3s ease;
+    }
+
+    .tempo-contador strong {
+      display: block;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .tempo-contador span {
+      font-size: 14px;
+      color: #aaaaaa;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .letra-card {
+      background-color: #a70414;
+      color: white;
+      border-radius: 16px;
+      width: 328px;
+      margin: 20px auto 0;
+      font-family: sans-serif;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      padding: 16px;
+      position: relative;
+    }
+
+    .letra-card h3 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .letra-card p {
+      position: relative;
+      font-size: 15px;
+      line-height: 1.5;
+      max-height: 80px;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      font-family: system-ui, sans-serif;
+      font-weight: bold;
+      margin-bottom: 0;
+    }
+
+    .letra-card button {
+      background-color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 30px;
+      transition: transform 0.3s ease;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .letra-card.mostrar p {
+      max-height:none;
+    }
+
+    .letra-card:not(.mostrar) p::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to top, #a70414, rgba(167, 4, 20, 0.596));
+      pointer-events: none;
+    }
+
+    .letra-card button:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    .coraçao {
+      position: fixed;
+      top: -30px;
+      font-size: 24px;
+      color: #ff2e63;
+      animation: cair 4s linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes cair {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="base">
+
+    <div class="estrutura">
+      <a href="mensagem.html" class="voltar-seta" title="Voltar">
+        <img src="imagens/botao-voltar.png" height="20px" />
+      </a>
+      <a href="edit.html" class="seguir-seta" title="Voltar">
+        <img src="imagens/botao-seguir.png" height="20px" />
+      </a>
+
+      <video autoplay muted loop>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+
+      <div class="estrutura-content">
+        <div class="top-info">
+          <span>TOCANDO DO ÁLBUM</span>
+          <h2>Felizes para sempre</h2>
+        </div>
+
+        <div class="music-info">
+          <img src="imagens/balinha2.jpeg" alt="Capa do Álbum" class="cover" />
+          <div class="details">
+            <h3>Velha Infância</h3>
+            <p>Tribalistas</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <div class="progress-container" id="progressBar">
+            <div class="progress-bar" id="progress"></div>
+          </div>
+
+          <div class="controls">
+            <button id="prevBtn"><img src="imagens/ante.png" height="40px"></button>
+            <button id="playPauseBtn"><img src="imagens/play.png" id="playPauseIcon" height="55px" /></button>
+            <button id="nextBtn"><img src="imagens/prox.png" height="40px"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contador-card">
+      <div class="imagem-casal">
+        <img src="imagens/casal.png" alt="Foto do casal">
+        <div class="texto-sobreposto">
+          <h2>Cauan e Isabela</h2>
+          <p>Juntos desde 2024</p>
+        </div>
+      </div>
+
+      <div class="tempo-contador" id="tempoContador">
+        <p style="width: 100%; font-size: 16px; color: #fff; margin: 0 0 5px; font-family: Arial;">Eu te amo faz</p>
+        <div><strong id="meses">0</strong><span>Meses</span></div>
+        <div><strong id="dias">0</strong><span>Dias</span></div>
+        <div><strong id="horas">0</strong><span>Horas</span></div>
+        <div><strong id="minutos">0</strong><span>Minutos</span></div>
+        <div><strong id="segundos">0</strong><span>Segundos</span></div>
+      </div>
+
+      <div class="letra-card" id="letraCard">
+        <h3>Mensagem</h3>
+        <p id="letraTexto">
+           Desde o dia em que nos falamos, senti algo muito especial em você. É a mulher que sempre sonhei, e a
+                cada dia que passa, tenho certeza de que escolhi a pessoa certa para compartilhar a minha vida. Com
+                você, sou muito mais feliz, e tudo isso é por ter você ao meu lado. Todos os nossos momentos foram muito
+                importantes para mim, seus gestos, seu amor e carinho me preencheram por completo. Não consigo me
+                imaginar em um futuro sem você. Me inspiro muito em você, e a cada dia me apaixono mais e mais. Te amo
+                muitoooooo minha pretinha!
+        </p>
+        <button onclick="toggleLetra()">Mostrar Mensagem</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer">
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById("audioPlayer");
+    const progress = document.getElementById("progress");
+    const playPauseBtn = document.getElementById("playPauseIcon");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    playPauseBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.src = "imagens/pause.png";
+      } else {
+        audio.pause();
+        playPauseBtn.src = "imagens/play.png";
+      }
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = percent + "%";
+    });
+
+    prevBtn.addEventListener("click", () => {
+      audio.currentTime = 0;
+    });
+
+    nextBtn.addEventListener("click", () => {
+      audio.currentTime = audio.duration;
+    });
+
+    function atualizarContador() {
+      const dataInicial = new Date("2024-12-06T00:00:00");
+      const agora = new Date();
+      let diff = agora - dataInicial;
+
+      if (diff < 0) {
+        document.getElementById("tempoContador").innerHTML = "<p>Ainda não começaram!</p>";
+        return;
+      }
+
+      let segundos = Math.floor(diff / 1000);
+      const anos = Math.floor(segundos / (365.25 * 24 * 60 * 60));
+      segundos -= anos * 365.25 * 24 * 60 * 60;
+
+      const meses = Math.floor(segundos / (30.44 * 24 * 60 * 60));
+      segundos -= meses * 30.44 * 24 * 60 * 60;
+
+      const dias = Math.floor(segundos / (24 * 60 * 60));
+      segundos -= dias * 24 * 60 * 60;
+
+      const horas = Math.floor(segundos / 3600);
+      segundos -= horas * 3600;
+
+      const minutos = Math.floor(segundos / 60);
+      segundos = Math.floor(segundos % 60);
+
+      document.getElementById("meses").textContent = meses;
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent = horas;
+      document.getElementById("minutos").textContent = minutos;
+      document.getElementById("segundos").textContent = segundos;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    function toggleLetra() {
+      const card = document.getElementById('letraCard');
+      const botao = card.querySelector('button');
+      card.classList.toggle('mostrar');
+      botao.textContent = card.classList.contains('mostrar') ? 'Ver menos' : 'Mostrar Mensagem';
+    }
+
+    function criarCoracao() {
+      const coracao = document.createElement("div");
+      coracao.classList.add("coraçao");
+      coracao.innerHTML = "❤️";
+      coracao.style.left = Math.random() * 100 + "vw";
+      const tamanho = Math.random() * 20 + 20;
+      coracao.style.fontSize = tamanho + "px";
+      document.body.appendChild(coracao);
+      setTimeout(() => {
+        coracao.remove();
+      }, 4000);
+    }
+
+    setInterval(criarCoracao, 300);
+  </script>
+</body>
+
+</html>
